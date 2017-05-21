@@ -25,7 +25,7 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 
-from __future__ import unicode_literals
+
 
 import os
 import re
@@ -49,7 +49,7 @@ try:
     advance_iterator = next
 except NameError:
     def advance_iterator(it):
-        return it.next()
+        return it.__next__()
 next = advance_iterator
 
 server_url = lambda path, port: "http://localhost:{0}/{1}".format(port, path.lstrip('/'))
@@ -318,7 +318,7 @@ def test_streaming_responses(now):
     #test iterating by line
     line_iter = response.iter_lines()
     with in_time(0.01, 'Iterating by line is taking forever!'):
-        for i in xrange(len(twitter_response_lines)):
+        for i in range(len(twitter_response_lines)):
             expect(next(line_iter).strip()).to.equal(
                 twitter_response_lines[i].strip())
 
@@ -329,7 +329,7 @@ def test_streaming_responses(now):
     line_iter = response.iter_lines()
     with in_time(0.01, 'Iterating by line is taking forever the second time '
                        'around!'):
-        for i in xrange(len(twitter_response_lines)):
+        for i in range(len(twitter_response_lines)):
             expect(next(line_iter).strip()).to.equal(
                 twitter_response_lines[i].strip())
 

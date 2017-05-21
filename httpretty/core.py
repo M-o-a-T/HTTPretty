@@ -23,7 +23,7 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
-from __future__ import unicode_literals
+
 
 import re
 import codecs
@@ -53,7 +53,7 @@ from .compat import (
     parse_qs,
     unquote_utf8,
     ClassTypes,
-    basestring
+    str
 )
 from .http import (
     STATUSES,
@@ -207,7 +207,7 @@ class HTTPrettyRequest(BaseHTTPRequestHandler, BaseClass):
         # `application/json` or `application/x-www-form-urlencoded`
         self.parsed_body = self.parse_request_body(self._body)
 
-    def __nonzero__(self):
+    def __bool__(self):
         return bool(self.body) or bool(self.raw_headers)
 
     def __str__(self):
@@ -607,7 +607,7 @@ class Entry(BaseClass):
         self.forcing_headers = forcing_headers or {}
         self.status = int(status)
 
-        for k, v in headers.items():
+        for k, v in list(headers.items()):
             name = "-".join(k.split("_")).title()
             self.adding_headers[name] = v
 
@@ -704,7 +704,7 @@ class Entry(BaseClass):
             if server:
                 string_list.append('server: %s' % server)
 
-        for k, v in headers.items():
+        for k, v in list(headers.items()):
             string_list.append(
                 '{0}: {1}'.format(k, v),
             )
@@ -926,7 +926,7 @@ class httpretty(HttpBaseClass):
     @classmethod
     def match_uriinfo(cls, info):
         items = sorted(
-            cls._entries.items(),
+            list(cls._entries.items()),
             key=lambda matcher_entries: matcher_entries[0].priority,
             reverse=True,
         )
@@ -1028,7 +1028,7 @@ class httpretty(HttpBaseClass):
                      priority=0,
                      **headers):
 
-        uri_is_string = isinstance(uri, basestring)
+        uri_is_string = isinstance(uri, str)
 
         if uri_is_string and re.search(r'^\w+://[^/]+[.]\w{2,}$', uri):
             uri += '/'

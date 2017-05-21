@@ -24,14 +24,14 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
-from __future__ import unicode_literals
+
 
 try:
     from urllib.request import urlopen
     import urllib.request as urllib2
 except ImportError:
-    import urllib2
-    urlopen = urllib2.urlopen
+    import urllib.request, urllib.error, urllib.parse
+    urlopen = urllib.request.urlopen
 
 from sure import *
 from httpretty import HTTPretty, httprettified
@@ -61,7 +61,7 @@ def test_httpretty_provides_easy_access_to_querystrings(now):
     HTTPretty.register_uri(HTTPretty.GET, "http://yipit.com/",
                            body="Find the best daily deals")
 
-    fd = urllib2.urlopen('http://yipit.com/?foo=bar&foo=baz&chuck=norris')
+    fd = urllib.request.urlopen('http://yipit.com/?foo=bar&foo=baz&chuck=norris')
     fd.read()
     fd.close()
 
@@ -215,7 +215,7 @@ def test_can_inspect_last_request(now):
     HTTPretty.register_uri(HTTPretty.POST, "http://api.github.com/",
                            body='{"repositories": ["HTTPretty", "lettuce"]}')
 
-    request = urllib2.Request(
+    request = urllib.request.Request(
         'http://api.github.com',
         b'{"username": "gabrielfalcao"}',
         {
@@ -244,7 +244,7 @@ def test_can_inspect_last_request_with_ssl(now):
     HTTPretty.register_uri(HTTPretty.POST, "https://secure.github.com/",
                            body='{"repositories": ["HTTPretty", "lettuce"]}')
 
-    request = urllib2.Request(
+    request = urllib.request.Request(
         'https://secure.github.com',
         b'{"username": "gabrielfalcao"}',
         {
@@ -295,7 +295,7 @@ def test_callback_response(now):
         HTTPretty.GET, "https://api.yahoo.com/test",
         body=request_callback)
 
-    fd = urllib2.urlopen('https://api.yahoo.com/test')
+    fd = urllib.request.urlopen('https://api.yahoo.com/test')
     got = fd.read()
     fd.close()
 
@@ -305,14 +305,14 @@ def test_callback_response(now):
         HTTPretty.POST, "https://api.yahoo.com/test_post",
         body=request_callback)
 
-    request = urllib2.Request(
+    request = urllib.request.Request(
         "https://api.yahoo.com/test_post",
         b'{"username": "gabrielfalcao"}',
         {
             'content-type': 'text/json',
         },
     )
-    fd = urllib2.urlopen(request)
+    fd = urllib.request.urlopen(request)
     got = fd.read()
     fd.close()
 
@@ -329,10 +329,10 @@ def test_httpretty_should_allow_registering_regexes():
         body="Found brand",
     )
 
-    request = urllib2.Request(
+    request = urllib.request.Request(
         "https://api.yipit.com/v1/deal;brand=GAP",
     )
-    fd = urllib2.urlopen(request)
+    fd = urllib.request.urlopen(request)
     got = fd.read()
     fd.close()
 

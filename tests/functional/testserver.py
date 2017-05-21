@@ -24,7 +24,7 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
-from __future__ import unicode_literals
+
 
 import os
 import sys
@@ -33,8 +33,8 @@ try:
     import io
     StringIO = io.StringIO
 except ImportError:
-    import StringIO
-    StringIO = StringIO.StringIO
+    import io
+    StringIO = io.StringIO
 
 import time
 import socket
@@ -52,7 +52,7 @@ if PY3:
     text_type = str
     byte_type = bytes
 else:
-    text_type = unicode
+    text_type = str
     byte_type = str
 
 

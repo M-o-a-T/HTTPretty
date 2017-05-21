@@ -6,7 +6,7 @@ from httpretty import httprettified, HTTPretty
 try:
     import urllib.request as urllib2
 except ImportError:
-    import urllib2
+    import urllib.request, urllib.error, urllib.parse
 
 
 @httprettified
@@ -15,7 +15,7 @@ def test_decor():
         HTTPretty.GET, "http://localhost/",
         body="glub glub")
 
-    fd = urllib2.urlopen('http://localhost/')
+    fd = urllib.request.urlopen('http://localhost/')
     got1 = fd.read()
     fd.close()
 
@@ -34,7 +34,7 @@ class DecoratedNonUnitTest(object):
             HTTPretty.GET, "http://localhost/",
             body="glub glub")
 
-        fd = urllib2.urlopen('http://localhost/')
+        fd = urllib.request.urlopen('http://localhost/')
         got1 = fd.read()
         fd.close()
 
@@ -58,7 +58,7 @@ class ClassDecorator(TestCase):
             HTTPretty.GET, "http://localhost/",
             body="glub glub")
 
-        fd = urllib2.urlopen('http://localhost/')
+        fd = urllib.request.urlopen('http://localhost/')
         got1 = fd.read()
         fd.close()
 
@@ -69,7 +69,7 @@ class ClassDecorator(TestCase):
             HTTPretty.GET, "http://localhost/",
             body="buble buble")
 
-        fd = urllib2.urlopen('http://localhost/')
+        fd = urllib.request.urlopen('http://localhost/')
         got1 = fd.read()
         fd.close()
 
@@ -88,13 +88,13 @@ class ClassDecoratorWithSetUp(TestCase):
 
     def test_decorated(self):
 
-        fd = urllib2.urlopen('http://localhost/')
+        fd = urllib.request.urlopen('http://localhost/')
         got1 = fd.read()
         fd.close()
 
         expect(got1).to.equal(b'glub glub')
 
-        fd = urllib2.urlopen('http://localhost/')
+        fd = urllib.request.urlopen('http://localhost/')
         got2 = fd.read()
         fd.close()
 
@@ -102,13 +102,13 @@ class ClassDecoratorWithSetUp(TestCase):
 
     def test_decorated2(self):
 
-        fd = urllib2.urlopen('http://localhost/')
+        fd = urllib.request.urlopen('http://localhost/')
         got1 = fd.read()
         fd.close()
 
         expect(got1).to.equal(b'glub glub')
 
-        fd = urllib2.urlopen('http://localhost/')
+        fd = urllib.request.urlopen('http://localhost/')
         got2 = fd.read()
         fd.close()
 

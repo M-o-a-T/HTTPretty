@@ -25,7 +25,7 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 
-from __future__ import unicode_literals
+
 
 import os
 import json
@@ -64,7 +64,7 @@ class JSONEchoHandler(tornado.web.RequestHandler):
         self.write(json.dumps({
             matched or 'index': payload,
             'req_body': self.request.body,
-            'req_headers': dict(self.request.headers.items()),
+            'req_headers': dict(list(self.request.headers.items())),
         }, indent=4))
 
 

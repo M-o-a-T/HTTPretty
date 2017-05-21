@@ -24,7 +24,7 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
-from __future__ import unicode_literals
+
 
 import sys
 import types
@@ -35,14 +35,14 @@ if PY3:  # pragma: no cover
     byte_type = bytes
     import io
     StringIO = io.BytesIO
-    basestring = (str, bytes)
+    str = (str, bytes)
 
 else:  # pragma: no cover
-    text_type = unicode
+    text_type = str
     byte_type = str
-    import StringIO
-    StringIO = StringIO.StringIO
-    basestring = basestring
+    import io
+    StringIO = io.StringIO
+    str = str
 
 
 class BaseClass(object):
@@ -64,8 +64,8 @@ try:  # pragma: no cover
     from urllib.parse import unquote
     unquote_utf8 = unquote
 except ImportError:  # pragma: no cover
-    from urlparse import urlsplit, urlunsplit, parse_qs, unquote
-    from urllib import quote, quote_plus
+    from urllib.parse import urlsplit, urlunsplit, parse_qs, unquote
+    from urllib.parse import quote, quote_plus
 
     def unquote_utf8(qs):
         if isinstance(qs, text_type):
@@ -78,14 +78,14 @@ except ImportError:  # pragma: no cover
 
 
 try:  # pragma: no cover
-    from http.server import BaseHTTPRequestHandler
+    from .http.server import BaseHTTPRequestHandler
 except ImportError:  # pragma: no cover
-    from BaseHTTPServer import BaseHTTPRequestHandler
+    from http.server import BaseHTTPRequestHandler
 
 
 ClassTypes = (type,)
 if not PY3:  # pragma: no cover
-    ClassTypes = (type, types.ClassType)
+    ClassTypes = (type, type)
 
 
 __all__ = [

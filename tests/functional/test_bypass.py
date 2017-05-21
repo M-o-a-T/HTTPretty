@@ -24,13 +24,13 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
-from __future__ import unicode_literals
+
 import time
 import requests
 try:
     import urllib.request as urllib2
 except ImportError:
-    import urllib2
+    import urllib.request, urllib.error, urllib.parse
 
 from .testserver import TornadoServer, TCPServer, TCPClient
 from .base import get_free_tcp_port
@@ -93,14 +93,14 @@ def test_httpretty_bypasses_when_disabled(context):
 
     httpretty.disable()
 
-    fd = urllib2.urlopen('http://localhost:{0}/go-for-bubbles/'.format(context.http_port))
+    fd = urllib.request.urlopen('http://localhost:{0}/go-for-bubbles/'.format(context.http_port))
     got1 = fd.read()
     fd.close()
 
     expect(got1).to.equal(
         b'. o O 0 O o . o O 0 O o . o O 0 O o . o O 0 O o . o O 0 O o .')
 
-    fd = urllib2.urlopen('http://localhost:{0}/come-again/'.format(context.http_port))
+    fd = urllib.request.urlopen('http://localhost:{0}/come-again/'.format(context.http_port))
     got2 = fd.read()
     fd.close()
 
@@ -108,7 +108,7 @@ def test_httpretty_bypasses_when_disabled(context):
 
     httpretty.enable()
 
-    fd = urllib2.urlopen('http://localhost:{0}/go-for-bubbles/'.format(context.http_port))
+    fd = urllib.request.urlopen('http://localhost:{0}/go-for-bubbles/'.format(context.http_port))
     got3 = fd.read()
     fd.close()
 
@@ -125,13 +125,13 @@ def test_httpretty_bypasses_a_unregistered_request(context):
         httpretty.GET, "http://localhost:{0}/go-for-bubbles/".format(context.http_port),
         body="glub glub")
 
-    fd = urllib2.urlopen('http://localhost:{0}/go-for-bubbles/'.format(context.http_port))
+    fd = urllib.request.urlopen('http://localhost:{0}/go-for-bubbles/'.format(context.http_port))
     got1 = fd.read()
     fd.close()
 
     expect(got1).to.equal(b'glub glub')
 
-    fd = urllib2.urlopen('http://localhost:{0}/come-again/'.format(context.http_port))
+    fd = urllib.request.urlopen('http://localhost:{0}/come-again/'.format(context.http_port))
     got2 = fd.read()
     fd.close()
 
@@ -148,7 +148,7 @@ def test_using_httpretty_with_other_tcp_protocols(context):
         httpretty.GET, "http://falcao.it/foo/",
         body="BAR")
 
-    fd = urllib2.urlopen('http://falcao.it/foo/')
+    fd = urllib.request.urlopen('http://falcao.it/foo/')
     got1 = fd.read()
     fd.close()
 
@@ -182,7 +182,7 @@ def test_disallow_net_connect_1(context):
     def foo():
         fd = None
         try:
-            fd = urllib2.urlopen('http://localhost:{0}/go-for-bubbles/'.format(context.http_port))
+            fd = urllib.request.urlopen('http://localhost:{0}/go-for-bubbles/'.format(context.http_port))
         finally:
             if fd:
                 fd.close()
@@ -201,7 +201,7 @@ def test_disallow_net_connect_2():
     def foo():
         fd = None
         try:
-            fd = urllib2.urlopen('http://example.com/nonsense')
+            fd = urllib.request.urlopen('http://example.com/nonsense')
         finally:
             if fd:
                 fd.close()
@@ -216,7 +216,7 @@ def test_disallow_net_connect_3():
 
     httpretty.register_uri(httpretty.GET, "http://falcao.it/foo/",
                            body="BAR")
-    fd = urllib2.urlopen('http://falcao.it/foo/')
+    fd = urllib.request.urlopen('http://falcao.it/foo/')
     got1 = fd.read()
     fd.close()
     expect(got1).to.equal(b'BAR')

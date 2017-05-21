@@ -1,6 +1,6 @@
 # #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 import json
 import errno
 from datetime import datetime
@@ -206,15 +206,15 @@ def test_fakesock_socket_getpeercert(dt):
 
     # Then it should return a hardcoded value
     certificate.should.equal({
-        u'notAfter': 'Sep 29 04:20:00 GMT',
-        u'subject': (
-            ((u'organizationName', u'*.somewhere.com'),),
-            ((u'organizationalUnitName', u'Domain Control Validated'),),
-            ((u'commonName', u'*.somewhere.com'),)),
-        u'subjectAltName': (
-            (u'DNS', u'*somewhere.com'),
-            (u'DNS', u'somewhere.com'),
-            (u'DNS', u'*')
+        'notAfter': 'Sep 29 04:20:00 GMT',
+        'subject': (
+            (('organizationName', '*.somewhere.com'),),
+            (('organizationalUnitName', 'Domain Control Validated'),),
+            (('commonName', '*.somewhere.com'),)),
+        'subjectAltName': (
+            ('DNS', '*somewhere.com'),
+            ('DNS', 'somewhere.com'),
+            ('DNS', '*')
         )
     })
 
