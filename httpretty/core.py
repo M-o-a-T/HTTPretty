@@ -26,6 +26,7 @@
 
 
 import re
+import os
 import codecs
 import socket
 import functools
@@ -254,9 +255,16 @@ class HTTPrettyRequestEmpty(object):
 
 
 class FakeSockFile(object):
-    def __init__(self):
+    _pipe = None
+
+    def __init__(self, old_fd = None):
         self.file = tempfile.TemporaryFile()
-        self._fileno = self.file.fileno()
+        self._pipe = list(os.pipe()) if old_fd is None else old_fd._pipe
+        if len(self._pipe) == 2:
+            self._pipe.append(1)
+        else:
+            self._pipe[2] += 1
+        self._fileno = self._pipe[0]
 
     def getvalue(self):
         if hasattr(self.file, 'getvalue'):
@@ -274,6 +282,12 @@ class FakeSockFile(object):
     def __getattr__(self, name):
         return getattr(self.file, name)
 
+    def __del__(self):
+        if self._pipe:
+            self._pipe[2] -= 1
+            if not self._pipe[2]:
+                os.close(self._pipe[0])
+                os.close(self._pipe[1])
 
 class FakeSSLSocket(object):
     def __init__(self, sock, *args, **kw):
@@ -288,6 +302,7 @@ class fakesock(object):
         _entry = None
         debuglevel = 0
         _sent_data = []
+        _mode = None
 
         def __init__(self, family=socket.AF_INET, type=socket.SOCK_STREAM,
                      proto=0, _sock=None):
@@ -363,7 +378,7 @@ class fakesock(object):
                     self._connected_truesock = True
 
         def fileno(self):
-            if self.truesock:
+            if self.truesock and self._connected_truesock:
                 return self.truesock.fileno()
             return self.fd.fileno()
 
@@ -380,11 +395,14 @@ class fakesock(object):
             descriptor gets filled in with the entry data before being
             returned.
             """
+            if self._mode is not None:
+                return self.fd
             self._mode = mode
             self._bufsize = bufsize
 
             if self._entry:
                 self._entry.fill_filekind(self.fd)
+                os.write(self.fd._pipe[1],b'x')
             return self.fd
 
         def real_sendall(self, data, *args, **kw):
@@ -426,10 +444,11 @@ class fakesock(object):
                     break
 
             self.fd.seek(0)
+            return len(data)
 
         def sendall(self, data, *args, **kw):
             self._sent_data.append(data)
-            self.fd = FakeSockFile()
+            self.fd = FakeSockFile(self.fd)
             self.fd.socket = self
             try:
                 requestline, _ = data.split(b'\r\n', 1)
@@ -466,7 +485,7 @@ class fakesock(object):
                         self._entry.request.body += body
 
                     httpretty.historify_request(headers, body, False)
-                    return
+                    return len(data)
 
             # path might come with
             s = urlsplit(path)
@@ -492,10 +511,11 @@ class fakesock(object):
 
             if not entries:
                 self._entry = None
-                self.real_sendall(data)
-                return
+                return self.real_sendall(data)
 
             self._entry = matcher.get_next_entry(method, info, request)
+            self.makefile()
+            return len(data)
 
         def debug(self, truesock_func, *a, **kw):
             if self.is_http:
@@ -508,6 +528,8 @@ class fakesock(object):
             self.timeout = new_timeout
 
         def send(self, *args, **kwargs):
+            if len(args) == 1 and not kwargs:
+                return self.sendall(*args)
             return self.debug('send', *args, **kwargs)
 
         def sendto(self, *args, **kwargs):
@@ -523,6 +545,8 @@ class fakesock(object):
             return self.debug('recvfrom', *args, **kwargs)
 
         def recv(self, *args, **kwargs):
+            if len(args) == 1 and not kwargs:
+                return self.fd.read(*args)
             return self.debug('recv', *args, **kwargs)
 
         def __getattr__(self, name):
