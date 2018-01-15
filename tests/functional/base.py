@@ -63,8 +63,8 @@ class JSONEchoHandler(tornado.web.RequestHandler):
         payload = dict(self.request.arguments)
         self.write(json.dumps({
             matched or 'index': payload,
-            'req_body': self.request.body,
-            'req_headers': dict(list(self.request.headers.items())),
+            'req_body': self.request.body.decode('utf-8'),
+            'req_headers': dict(self.request.headers.items()),
         }, indent=4))
 
 
