@@ -27,7 +27,6 @@
 
 import re
 import codecs
-import inspect
 import socket
 import functools
 from functools import partial
@@ -500,17 +499,7 @@ class fakesock(object):
 
         def debug(self, truesock_func, *a, **kw):
             if self.is_http:
-                frame = inspect.stack()[0][0]
-                lines = list(map(utf8, traceback.format_stack(frame)))
-
-                message = [
-                    "HTTPretty intercepted and unexpected socket method call.",
-                    ("Please open an issue at "
-                     "'https://github.com/gabrielfalcao/HTTPretty/issues'"),
-                    "And paste the following traceback:\n",
-                    "".join(decode_utf8(lines)),
-                ]
-                raise RuntimeError("\n".join(message))
+                raise RuntimeError("HTTPretty intercepted an unexpected socket method call: "+truesock_func,)
             if not self.truesock:
                 raise UnmockedError()
             return getattr(self.truesock, truesock_func)(*a, **kw)
