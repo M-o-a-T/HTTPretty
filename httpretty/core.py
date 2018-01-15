@@ -291,8 +291,8 @@ class fakesock(object):
         _sent_data = []
 
         def __init__(self, family=socket.AF_INET, type=socket.SOCK_STREAM,
-                     protocol=0, _sock=None):
-            self.truesock = (old_socket(family, type, protocol)
+                     proto=0, _sock=None):
+            self.truesock = (old_socket(family, type, proto)
                              if httpretty.allow_net_connect
                              else None)
             self._connected_truesock = False
