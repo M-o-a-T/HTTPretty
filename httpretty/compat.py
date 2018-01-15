@@ -35,14 +35,14 @@ if PY3:  # pragma: no cover
     byte_type = bytes
     import io
     StringIO = io.BytesIO
-    str = (str, bytes)
+    str_types = (str, bytes)
 
 else:  # pragma: no cover
     text_type = str
     byte_type = str
     import io
     StringIO = io.StringIO
-    str = str
+    str_types = (str,)
 
 
 class BaseClass(object):

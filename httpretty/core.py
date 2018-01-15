@@ -52,7 +52,7 @@ from .compat import (
     parse_qs,
     unquote_utf8,
     ClassTypes,
-    str
+    str_types
 )
 from .http import (
     STATUSES,
@@ -1081,7 +1081,7 @@ class httpretty(HttpBaseClass):
                      priority=0,
                      **headers):
 
-        uri_is_string = isinstance(uri, str)
+        uri_is_string = isinstance(uri, str_types)
 
         if uri_is_string and re.search(r'^\w+://[^/]+[.]\w{2,}$', uri):
             uri += '/'
@@ -1092,10 +1092,10 @@ class httpretty(HttpBaseClass):
                 response.method = method
             entries_for_this_uri = responses
         else:
-            headers[str('body')] = body
-            headers[str('adding_headers')] = adding_headers
-            headers[str('forcing_headers')] = forcing_headers
-            headers[str('status')] = status
+            headers['body'] = body
+            headers['adding_headers'] = adding_headers
+            headers['forcing_headers'] = forcing_headers
+            headers['status'] = status
 
             entries_for_this_uri = [
                 cls.Response(method=method, uri=uri, **headers),
@@ -1123,11 +1123,11 @@ class httpretty(HttpBaseClass):
             streaming=False,
             **headers):
 
-        headers[str('body')] = body
-        headers[str('adding_headers')] = adding_headers
-        headers[str('forcing_headers')] = forcing_headers
-        headers[str('status')] = int(status)
-        headers[str('streaming')] = streaming
+        headers['body'] = body
+        headers['adding_headers'] = adding_headers
+        headers['forcing_headers'] = forcing_headers
+        headers['status'] = int(status)
+        headers['streaming'] = streaming
         return Entry(method, uri, **headers)
 
     @classmethod
