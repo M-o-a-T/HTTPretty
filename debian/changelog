@@ -1,3 +1,9 @@
+httpretty (0.8.14+smurf-6) smurf; urgency=medium
+
+  * drop ipdb req
+
+ -- Matthias Urlichs <matthias@urlichs.de>  Tue, 23 Jan 2018 17:43:57 +0100
+
 httpretty (0.8.14+smurf-5) smurf; urgency=medium
 
   * down-depend sure, rednose
