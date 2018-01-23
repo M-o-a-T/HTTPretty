@@ -1,6 +1,6 @@
-httpretty (0.8.14+smurf-4) smurf; urgency=medium
+httpretty (0.8.14+smurf-5) smurf; urgency=medium
 
-  * down-depend sure
+  * down-depend sure, rednose
 
  -- Matthias Urlichs <matthias@urlichs.de>  Tue, 23 Jan 2018 17:36:26 +0100
 
