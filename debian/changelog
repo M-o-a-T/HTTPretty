@@ -1,3 +1,9 @@
+httpretty (0.8.14+smurf-4) smurf; urgency=medium
+
+  * down-depend sure
+
+ -- Matthias Urlichs <matthias@urlichs.de>  Tue, 23 Jan 2018 17:36:26 +0100
+
 httpretty (0.8.14+smurf-3) smurf; urgency=medium
 
   * ignore /.pybuild
