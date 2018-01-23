@@ -1,6 +1,7 @@
-httpretty (0.8.14+smurf-2) smurf; urgency=medium
+httpretty (0.8.14+smurf-3) smurf; urgency=medium
 
   * ignore /.pybuild
+  * sphinx dep
 
  -- Matthias Urlichs <matthias@urlichs.de>  Tue, 23 Jan 2018 17:17:59 +0100
 
