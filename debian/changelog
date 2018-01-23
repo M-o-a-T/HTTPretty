@@ -1,3 +1,9 @@
+httpretty (0.8.14+smurf-8) smurf; urgency=medium
+
+  * ugly
+
+ -- Matthias Urlichs <matthias@urlichs.de>  Tue, 23 Jan 2018 17:55:32 +0100
+
 httpretty (0.8.14+smurf-7) smurf; urgency=medium
 
   * down-depend sure, rednose
