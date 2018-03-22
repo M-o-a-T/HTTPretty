@@ -30,7 +30,6 @@ from sure import expect
 from httpretty import HTTPretty, HTTPrettyError, core
 from httpretty.core import URIInfo, BaseClass, Entry, FakeSockFile, HTTPrettyRequest
 from httpretty.http import STATUSES
-import pytest
 
 try:
     from mock import MagicMock
@@ -295,7 +294,7 @@ def test_fake_socket_passes_through_setblocking():
     expect(s.setblocking).called_with(0).should_not.throw(AttributeError)
     s.truesock.setblocking.assert_called_with(0)
 
-@pytest.mark.skip("doesn't")
+@unittest.skip("doesn't")
 def test_fake_socket_passes_through_fileno():
     import socket
     HTTPretty.enable()

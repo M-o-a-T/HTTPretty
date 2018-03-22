@@ -1,34 +1,21 @@
 HTTPretty 0.8.14
 ================
 
-|https://s3-us-west-2.amazonaws.com/s.cdpn.io/18885/httpretty-logo\_1.svg|
-|Build Status|
-`ChangeLog <https://github.com/gabrielfalcao/HTTPretty/blob/master/docs/NEWS.md>`__
+[![Build Status](https://travis-ci.org/M-o-a-T/HTTPretty.svg?branch=master)](https://travis-ci.org/M-o-a-T/HTTPretty)
 
 disclaimer:
 ~~~~~~~~~~~
 
-Due to big API incompatibility between python 3.3, 3.4 and 3.5, the
-author of HTTPretty is **not** supporting python3 officially. You will
-notice that the travis build for python 3 might be broken, and while
-pull requests fixing py3 support are most welcome, it is still not
-official at least *for now*.
+This is a hacked version which supports Python 3.5+ _only_.
 
-Installing
-==========
+The person responsible for this branch is Matthias Urlichs
+<matthias@urlichs.de>, who grudgingly hacked Python 3.5 compatibility into
+this here thing because he needs this for testing aioswagger11_, but
+otherwise thinks that this library, as well as the ``sure`` library it uses
+for testing, are ugly Ruby abominations which have no place in polite
+Pythonic society.
 
-Since you are interested in HTTPretty you should also be interested in
-speeding up your build. Replace ``pip`` with
-`curdling <http://clarete.github.io/curdling/>`__ and see your build
-running a lot faster.
-
-You can use curdling to install not only HTTPretty but every dependency
-in your project and see the speed gains.
-
-.. code:: bash
-
-    $ easy_install curdling
-    $ curd install HTTPretty
+.. _aioswagger11: http://github.com/M-o-a-T/aioswagger
 
 In a nutshell
 =============
