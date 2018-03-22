@@ -56,7 +56,7 @@ server_url = lambda path, port: "http://localhost:{0}/{1}".format(port, path.lst
 
 
 @httprettified
-def test_httpretty_should_mock_a_simple_get_with_requests_read(now):
+def test_httpretty_should_mock_a_simple_get_with_requests_read():
     "HTTPretty should mock a simple GET with requests.get"
 
     HTTPretty.register_uri(HTTPretty.GET, "http://yipit.com/",
@@ -69,7 +69,7 @@ def test_httpretty_should_mock_a_simple_get_with_requests_read(now):
 
 
 @httprettified
-def test_httpretty_provides_easy_access_to_querystrings(now):
+def test_httpretty_provides_easy_access_to_querystrings():
     "HTTPretty should provide an easy access to the querystring"
 
     HTTPretty.register_uri(HTTPretty.GET, "http://yipit.com/",
@@ -83,7 +83,7 @@ def test_httpretty_provides_easy_access_to_querystrings(now):
 
 
 @httprettified
-def test_httpretty_should_mock_headers_requests(now):
+def test_httpretty_should_mock_headers_requests():
     "HTTPretty should mock basic headers with requests"
 
     HTTPretty.register_uri(HTTPretty.GET, "http://github.com/",
@@ -99,12 +99,11 @@ def test_httpretty_should_mock_headers_requests(now):
         'content-length': '35',
         'status': '201',
         'server': 'Python/HTTPretty',
-        'date': now.strftime('%a, %d %b %Y %H:%M:%S GMT'),
     })
 
 
 @httprettified
-def test_httpretty_should_allow_adding_and_overwritting_requests(now):
+def test_httpretty_should_allow_adding_and_overwritting_requests():
     "HTTPretty should allow adding and overwritting headers with requests"
 
     HTTPretty.register_uri(HTTPretty.GET, "http://github.com/foo",
@@ -123,12 +122,11 @@ def test_httpretty_should_allow_adding_and_overwritting_requests(now):
         'content-length': '27',
         'status': '200',
         'server': 'Apache',
-        'date': now.strftime('%a, %d %b %Y %H:%M:%S GMT'),
     })
 
 
 @httprettified
-def test_httpretty_should_allow_forcing_headers_requests(now):
+def test_httpretty_should_allow_forcing_headers_requests():
     "HTTPretty should allow forcing headers with requests"
 
     HTTPretty.register_uri(HTTPretty.GET, "http://github.com/foo",
@@ -147,7 +145,7 @@ def test_httpretty_should_allow_forcing_headers_requests(now):
 
 
 @httprettified
-def test_httpretty_should_allow_adding_and_overwritting_by_kwargs_u2(now):
+def test_httpretty_should_allow_adding_and_overwritting_by_kwargs_u2():
     "HTTPretty should allow adding and overwritting headers by keyword args " \
         "with requests"
 
@@ -165,12 +163,11 @@ def test_httpretty_should_allow_adding_and_overwritting_by_kwargs_u2(now):
         'content-length': '27',
         'status': '200',
         'server': 'Apache',
-        'date': now.strftime('%a, %d %b %Y %H:%M:%S GMT'),
     })
 
 
 @httprettified
-def test_rotating_responses_with_requests(now):
+def test_rotating_responses_with_requests():
     "HTTPretty should support rotating responses with requests"
 
     HTTPretty.register_uri(
@@ -200,7 +197,7 @@ def test_rotating_responses_with_requests(now):
 
 
 @httprettified
-def test_can_inspect_last_request(now):
+def test_can_inspect_last_request():
     "HTTPretty.last_request is a mimetools.Message request from last match"
 
     HTTPretty.register_uri(HTTPretty.POST, "http://api.github.com/",
@@ -225,7 +222,7 @@ def test_can_inspect_last_request(now):
 
 
 @httprettified
-def test_can_inspect_last_request_with_ssl(now):
+def test_can_inspect_last_request_with_ssl():
     "HTTPretty.last_request is recorded even when mocking 'https' (SSL)"
 
     HTTPretty.register_uri(HTTPretty.POST, "https://secure.github.com/",
@@ -250,7 +247,7 @@ def test_can_inspect_last_request_with_ssl(now):
 
 
 @httprettified
-def test_httpretty_ignores_querystrings_from_registered_uri(now):
+def test_httpretty_ignores_querystrings_from_registered_uri():
     "HTTPretty should ignore querystrings from the registered uri (requests library)"
 
     HTTPretty.register_uri(HTTPretty.GET, "http://yipit.com/?id=123",
@@ -263,7 +260,7 @@ def test_httpretty_ignores_querystrings_from_registered_uri(now):
 
 
 @httprettified
-def test_streaming_responses(now):
+def test_streaming_responses():
     """
     Mock a streaming HTTP response, like those returned by the Twitter streaming
     API.
@@ -410,7 +407,7 @@ def test_multipart():
 
 
 @httprettified
-def test_callback_response(now):
+def test_callback_response():
     ("HTTPretty should call a callback function and set its return value as the body of the response"
      " requests")
 
@@ -437,7 +434,7 @@ def test_callback_response(now):
     expect(response.text).to.equal("The POST response from https://api.yahoo.com/test_post")
 
 @httprettified
-def test_callback_body_remains_callable_for_any_subsequent_requests(now):
+def test_callback_body_remains_callable_for_any_subsequent_requests():
     ("HTTPretty should call a callback function more than one"
      " requests")
 
@@ -455,7 +452,7 @@ def test_callback_body_remains_callable_for_any_subsequent_requests(now):
     expect(response.text).to.equal("The GET response from https://api.yahoo.com/test")
 
 @httprettified
-def test_callback_setting_headers_and_status_response(now):
+def test_callback_setting_headers_and_status_response():
     ("HTTPretty should call a callback function and uses it retur tuple as status code, headers and body"
      " requests")
 
@@ -505,7 +502,7 @@ def test_httpretty_should_respect_matcher_priority():
 
 
 @httprettified
-def test_callback_setting_content_length_on_head(now):
+def test_callback_setting_content_length_on_head():
     ("HTTPretty should call a callback function, use it's return tuple as status code, headers and body"
      " requests and respect the content-length header when responding to HEAD")
 

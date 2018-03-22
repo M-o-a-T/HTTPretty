@@ -34,7 +34,7 @@ from httpretty.core import decode_utf8
 
 
 @httprettified
-def test_httpretty_should_mock_a_simple_get_with_httplib2_read(now):
+def test_httpretty_should_mock_a_simple_get_with_httplib2_read():
     "HTTPretty should mock a simple GET with httplib2.context.http"
 
     HTTPretty.register_uri(HTTPretty.GET, "http://yipit.com/",
@@ -48,7 +48,7 @@ def test_httpretty_should_mock_a_simple_get_with_httplib2_read(now):
 
 
 @httprettified
-def test_httpretty_provides_easy_access_to_querystrings(now):
+def test_httpretty_provides_easy_access_to_querystrings():
     "HTTPretty should provide an easy access to the querystring"
 
     HTTPretty.register_uri(HTTPretty.GET, "http://yipit.com/",
@@ -63,7 +63,7 @@ def test_httpretty_provides_easy_access_to_querystrings(now):
 
 
 @httprettified
-def test_httpretty_should_mock_headers_httplib2(now):
+def test_httpretty_should_mock_headers_httplib2():
     "HTTPretty should mock basic headers with httplib2"
 
     HTTPretty.register_uri(HTTPretty.GET, "http://github.com/",
@@ -78,12 +78,11 @@ def test_httpretty_should_mock_headers_httplib2(now):
         'content-length': '35',
         'status': '201',
         'server': 'Python/HTTPretty',
-        'date': now.strftime('%a, %d %b %Y %H:%M:%S GMT'),
     })
 
 
 @httprettified
-def test_httpretty_should_allow_adding_and_overwritting_httplib2(now):
+def test_httpretty_should_allow_adding_and_overwritting_httplib2():
     "HTTPretty should allow adding and overwritting headers with httplib2"
 
     HTTPretty.register_uri(HTTPretty.GET, "http://github.com/foo",
@@ -103,12 +102,11 @@ def test_httpretty_should_allow_adding_and_overwritting_httplib2(now):
         'content-length': '27',
         'status': '200',
         'server': 'Apache',
-        'date': now.strftime('%a, %d %b %Y %H:%M:%S GMT'),
     })
 
 
 @httprettified
-def test_httpretty_should_allow_forcing_headers_httplib2(now):
+def test_httpretty_should_allow_forcing_headers_httplib2():
     "HTTPretty should allow forcing headers with httplib2"
 
     HTTPretty.register_uri(HTTPretty.GET, "http://github.com/foo",
@@ -131,7 +129,7 @@ def test_httpretty_should_allow_forcing_headers_httplib2(now):
 
 
 @httprettified
-def test_httpretty_should_allow_adding_and_overwritting_by_kwargs_u2(now):
+def test_httpretty_should_allow_adding_and_overwritting_by_kwargs_u2():
     "HTTPretty should allow adding and overwritting headers by keyword args " \
         "with httplib2"
 
@@ -154,12 +152,11 @@ def test_httpretty_should_allow_adding_and_overwritting_by_kwargs_u2(now):
         'content-length': '27',
         'status': '200',
         'server': 'Apache',
-        'date': now.strftime('%a, %d %b %Y %H:%M:%S GMT'),
     })
 
 
 @httprettified
-def test_rotating_responses_with_httplib2(now):
+def test_rotating_responses_with_httplib2():
     "HTTPretty should support rotating responses with httplib2"
 
     HTTPretty.register_uri(
@@ -189,7 +186,7 @@ def test_rotating_responses_with_httplib2(now):
 
 
 @httprettified
-def test_can_inspect_last_request(now):
+def test_can_inspect_last_request():
     "HTTPretty.last_request is a mimetools.Message request from last match"
 
     HTTPretty.register_uri(HTTPretty.POST, "http://api.github.com/",
@@ -214,7 +211,7 @@ def test_can_inspect_last_request(now):
 
 
 @httprettified
-def test_can_inspect_last_request_with_ssl(now):
+def test_can_inspect_last_request_with_ssl():
     "HTTPretty.last_request is recorded even when mocking 'https' (SSL)"
 
     HTTPretty.register_uri(HTTPretty.POST, "https://secure.github.com/",
@@ -239,7 +236,7 @@ def test_can_inspect_last_request_with_ssl(now):
 
 
 @httprettified
-def test_httpretty_ignores_querystrings_from_registered_uri(now):
+def test_httpretty_ignores_querystrings_from_registered_uri():
     "Registering URIs with query string cause them to be ignored"
 
     HTTPretty.register_uri(HTTPretty.GET, "http://yipit.com/?id=123",
@@ -253,7 +250,7 @@ def test_httpretty_ignores_querystrings_from_registered_uri(now):
 
 
 @httprettified
-def test_callback_response(now):
+def test_callback_response():
     ("HTTPretty should all a callback function to be set as the body with"
       " httplib2")
 
