@@ -46,7 +46,7 @@ def test_httpretty_debugs_socket_send(context):
 
     expect(context.sock.send).when.called.to.throw(
         RuntimeError,
-        "HTTPretty intercepted and unexpected socket method call."
+        "HTTPretty intercepted an unexpected socket method call: send"
     )
 
 
@@ -57,7 +57,7 @@ def test_httpretty_debugs_socket_sendto(context):
 
     expect(context.sock.sendto).when.called.to.throw(
         RuntimeError,
-        "HTTPretty intercepted and unexpected socket method call."
+        "HTTPretty intercepted an unexpected socket method call: sendto"
     )
 
 
@@ -68,7 +68,7 @@ def test_httpretty_debugs_socket_recv(context):
 
     expect(context.sock.recv).when.called.to.throw(
         RuntimeError,
-        "HTTPretty intercepted and unexpected socket method call."
+        "HTTPretty intercepted an unexpected socket method call: recv"
     )
 
 
@@ -79,7 +79,7 @@ def test_httpretty_debugs_socket_recvfrom(context):
 
     expect(context.sock.recvfrom).when.called.to.throw(
         RuntimeError,
-        "HTTPretty intercepted and unexpected socket method call."
+        "HTTPretty intercepted an unexpected socket method call: recvfrom"
     )
 
 
@@ -90,7 +90,7 @@ def test_httpretty_debugs_socket_recv_into(context):
 
     expect(context.sock.recv_into).when.called.to.throw(
         RuntimeError,
-        "HTTPretty intercepted and unexpected socket method call."
+        "HTTPretty intercepted an unexpected socket method call: recv_into"
     )
 
 
@@ -101,5 +101,5 @@ def test_httpretty_debugs_socket_recvfrom_into(context):
 
     expect(context.sock.recvfrom_into).when.called.to.throw(
         RuntimeError,
-        "HTTPretty intercepted and unexpected socket method call."
+        "HTTPretty intercepted an unexpected socket method call: recvfrom_into"
     )
