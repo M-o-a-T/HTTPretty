@@ -31,7 +31,7 @@ import os
 import re
 import json
 import requests
-from sure import within, microseconds, expect
+from sure import expect
 from tornado import version as tornado_version
 from httpretty import HTTPretty, httprettified
 from httpretty.compat import text_type
@@ -56,7 +56,6 @@ server_url = lambda path, port: "http://localhost:{0}/{1}".format(port, path.lst
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_mock_a_simple_get_with_requests_read(now):
     "HTTPretty should mock a simple GET with requests.get"
 
@@ -70,7 +69,6 @@ def test_httpretty_should_mock_a_simple_get_with_requests_read(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_provides_easy_access_to_querystrings(now):
     "HTTPretty should provide an easy access to the querystring"
 
@@ -85,7 +83,6 @@ def test_httpretty_provides_easy_access_to_querystrings(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_mock_headers_requests(now):
     "HTTPretty should mock basic headers with requests"
 
@@ -107,7 +104,6 @@ def test_httpretty_should_mock_headers_requests(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_allow_adding_and_overwritting_requests(now):
     "HTTPretty should allow adding and overwritting headers with requests"
 
@@ -132,7 +128,6 @@ def test_httpretty_should_allow_adding_and_overwritting_requests(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_allow_forcing_headers_requests(now):
     "HTTPretty should allow forcing headers with requests"
 
@@ -152,7 +147,6 @@ def test_httpretty_should_allow_forcing_headers_requests(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_allow_adding_and_overwritting_by_kwargs_u2(now):
     "HTTPretty should allow adding and overwritting headers by keyword args " \
         "with requests"
@@ -176,7 +170,6 @@ def test_httpretty_should_allow_adding_and_overwritting_by_kwargs_u2(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_rotating_responses_with_requests(now):
     "HTTPretty should support rotating responses with requests"
 
@@ -207,7 +200,6 @@ def test_rotating_responses_with_requests(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_can_inspect_last_request(now):
     "HTTPretty.last_request is a mimetools.Message request from last match"
 
@@ -233,7 +225,6 @@ def test_can_inspect_last_request(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_can_inspect_last_request_with_ssl(now):
     "HTTPretty.last_request is recorded even when mocking 'https' (SSL)"
 
@@ -259,7 +250,6 @@ def test_can_inspect_last_request_with_ssl(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_ignores_querystrings_from_registered_uri(now):
     "HTTPretty should ignore querystrings from the registered uri (requests library)"
 
@@ -273,7 +263,6 @@ def test_httpretty_ignores_querystrings_from_registered_uri(now):
 
 
 @httprettified
-@within(five=microseconds)
 def test_streaming_responses(now):
     """
     Mock a streaming HTTP response, like those returned by the Twitter streaming
@@ -421,7 +410,6 @@ def test_multipart():
 
 
 @httprettified
-@within(two=microseconds)
 def test_callback_response(now):
     ("HTTPretty should call a callback function and set its return value as the body of the response"
      " requests")
@@ -449,7 +437,6 @@ def test_callback_response(now):
     expect(response.text).to.equal("The POST response from https://api.yahoo.com/test_post")
 
 @httprettified
-@within(two=microseconds)
 def test_callback_body_remains_callable_for_any_subsequent_requests(now):
     ("HTTPretty should call a callback function more than one"
      " requests")
@@ -468,7 +455,6 @@ def test_callback_body_remains_callable_for_any_subsequent_requests(now):
     expect(response.text).to.equal("The GET response from https://api.yahoo.com/test")
 
 @httprettified
-@within(two=microseconds)
 def test_callback_setting_headers_and_status_response(now):
     ("HTTPretty should call a callback function and uses it retur tuple as status code, headers and body"
      " requests")
@@ -519,7 +505,6 @@ def test_httpretty_should_respect_matcher_priority():
 
 
 @httprettified
-@within(two=microseconds)
 def test_callback_setting_content_length_on_head(now):
     ("HTTPretty should call a callback function, use it's return tuple as status code, headers and body"
      " requests and respect the content-length header when responding to HEAD")

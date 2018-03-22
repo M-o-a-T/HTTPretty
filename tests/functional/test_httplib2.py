@@ -28,13 +28,12 @@
 
 import re
 import httplib2
-from sure import expect, within, microseconds
+from sure import expect
 from httpretty import HTTPretty, httprettified
 from httpretty.core import decode_utf8
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_mock_a_simple_get_with_httplib2_read(now):
     "HTTPretty should mock a simple GET with httplib2.context.http"
 
@@ -49,7 +48,6 @@ def test_httpretty_should_mock_a_simple_get_with_httplib2_read(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_provides_easy_access_to_querystrings(now):
     "HTTPretty should provide an easy access to the querystring"
 
@@ -65,7 +63,6 @@ def test_httpretty_provides_easy_access_to_querystrings(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_mock_headers_httplib2(now):
     "HTTPretty should mock basic headers with httplib2"
 
@@ -86,7 +83,6 @@ def test_httpretty_should_mock_headers_httplib2(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_allow_adding_and_overwritting_httplib2(now):
     "HTTPretty should allow adding and overwritting headers with httplib2"
 
@@ -112,7 +108,6 @@ def test_httpretty_should_allow_adding_and_overwritting_httplib2(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_allow_forcing_headers_httplib2(now):
     "HTTPretty should allow forcing headers with httplib2"
 
@@ -136,7 +131,6 @@ def test_httpretty_should_allow_forcing_headers_httplib2(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_allow_adding_and_overwritting_by_kwargs_u2(now):
     "HTTPretty should allow adding and overwritting headers by keyword args " \
         "with httplib2"
@@ -165,7 +159,6 @@ def test_httpretty_should_allow_adding_and_overwritting_by_kwargs_u2(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_rotating_responses_with_httplib2(now):
     "HTTPretty should support rotating responses with httplib2"
 
@@ -196,7 +189,6 @@ def test_rotating_responses_with_httplib2(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_can_inspect_last_request(now):
     "HTTPretty.last_request is a mimetools.Message request from last match"
 
@@ -222,7 +214,6 @@ def test_can_inspect_last_request(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_can_inspect_last_request_with_ssl(now):
     "HTTPretty.last_request is recorded even when mocking 'https' (SSL)"
 
@@ -248,7 +239,6 @@ def test_can_inspect_last_request_with_ssl(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_ignores_querystrings_from_registered_uri(now):
     "Registering URIs with query string cause them to be ignored"
 
@@ -263,7 +253,6 @@ def test_httpretty_ignores_querystrings_from_registered_uri(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_callback_response(now):
     ("HTTPretty should all a callback function to be set as the body with"
       " httplib2")

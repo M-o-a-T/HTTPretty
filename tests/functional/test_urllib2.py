@@ -35,7 +35,6 @@ from httpretty.core import decode_utf8
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_mock_a_simple_get_with_urllib2_read():
     "HTTPretty should mock a simple GET with urllib2.read()"
 
@@ -50,7 +49,6 @@ def test_httpretty_should_mock_a_simple_get_with_urllib2_read():
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_provides_easy_access_to_querystrings(now):
     "HTTPretty should provide an easy access to the querystring"
 
@@ -68,7 +66,6 @@ def test_httpretty_provides_easy_access_to_querystrings(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_mock_headers_urllib2(now):
     "HTTPretty should mock basic headers with urllib2"
 
@@ -93,7 +90,6 @@ def test_httpretty_should_mock_headers_urllib2(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_allow_adding_and_overwritting_urllib2(now):
     "HTTPretty should allow adding and overwritting headers with urllib2"
 
@@ -121,7 +117,6 @@ def test_httpretty_should_allow_adding_and_overwritting_urllib2(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_allow_forcing_headers_urllib2():
     "HTTPretty should allow forcing headers with urllib2"
 
@@ -143,7 +138,6 @@ def test_httpretty_should_allow_forcing_headers_urllib2():
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_allow_adding_and_overwritting_by_kwargs_u2(now):
     "HTTPretty should allow adding and overwritting headers by " \
     "keyword args with urllib2"
@@ -171,7 +165,6 @@ def test_httpretty_should_allow_adding_and_overwritting_by_kwargs_u2(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_should_support_a_list_of_successive_responses_urllib2(now):
     "HTTPretty should support adding a list of successive " \
     "responses with urllib2"
@@ -204,7 +197,6 @@ def test_httpretty_should_support_a_list_of_successive_responses_urllib2(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_can_inspect_last_request(now):
     "HTTPretty.last_request is a mimetools.Message request from last match"
 
@@ -233,7 +225,6 @@ def test_can_inspect_last_request(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_can_inspect_last_request_with_ssl(now):
     "HTTPretty.last_request is recorded even when mocking 'https' (SSL)"
 
@@ -262,7 +253,6 @@ def test_can_inspect_last_request_with_ssl(now):
 
 
 @httprettified
-@within(two=microseconds)
 def test_httpretty_ignores_querystrings_from_registered_uri():
     "HTTPretty should mock a simple GET with urllib2.read()"
 
@@ -279,7 +269,6 @@ def test_httpretty_ignores_querystrings_from_registered_uri():
 
 
 @httprettified
-@within(two=microseconds)
 def test_callback_response(now):
     ("HTTPretty should all a callback function to be set as the body with"
       " urllib2")
