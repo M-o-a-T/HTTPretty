@@ -30,6 +30,7 @@ from sure import expect
 from httpretty import HTTPretty, HTTPrettyError, core
 from httpretty.core import URIInfo, BaseClass, Entry, FakeSockFile, HTTPrettyRequest
 from httpretty.http import STATUSES
+import unittest
 
 try:
     from mock import MagicMock
