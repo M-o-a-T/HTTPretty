@@ -3,10 +3,7 @@ from unittest import TestCase
 from sure import expect
 from httpretty import httprettified, HTTPretty
 
-try:
-    import urllib.request as urllib2
-except ImportError:
-    import urllib.request, urllib.error, urllib.parse
+import urllib.request
 
 
 @httprettified

@@ -27,10 +27,7 @@
 
 import time
 import requests
-try:
-    import urllib.request as urllib2
-except ImportError:
-    import urllib.request, urllib.error, urllib.parse
+import urllib.request
 
 from .testserver import TornadoServer, TCPServer, TCPClient
 from .base import get_free_tcp_port

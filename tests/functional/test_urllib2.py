@@ -26,12 +26,8 @@
 # OTHER DEALINGS IN THE SOFTWARE.
 
 
-try:
-    from urllib.request import urlopen
-    import urllib.request as urllib2
-except ImportError:
-    import urllib.request, urllib.error, urllib.parse
-    urlopen = urllib.request.urlopen
+import urllib.request, urllib.error, urllib.parse
+urlopen = urllib.request.urlopen
 
 from sure import *
 from httpretty import HTTPretty, httprettified
